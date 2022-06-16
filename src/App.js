@@ -1,6 +1,5 @@
 import React, { useState, } from "react";
-// import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import About from "./components/About";
 import Nav from "./components/Nav";
 import Gallery from "./components/Gallery";
@@ -13,18 +12,29 @@ function App() {
     { name: "food", description: "Delicious delicacies" },
     { name: "landscape", description: "Fields, farmhouses, waterfalls, and the beauty of nature" },
 ]);
+// set to false to prevent the contact from from showing when a user initially navigates to the homepage
+const [contactSelected, setContactSelected] = useState(false);
 const [currentCategory, setCurrentCategory] = useState(categories[0]);
   return (
     <div> 
       <Nav
       categories={categories}
       setCurrentCategory={setCurrentCategory}
-      currentCategory={currentCategory} ></Nav>
+      currentCategory={currentCategory} 
+      contactSelected={contactSelected}
+        setContactSelected={setContactSelected}></Nav>
       <main>
         <ContactForm></ContactForm>
         {/* passing the current category from the Gallery component */}
+        {/* This is like an if statement */}
+        {!contactSelected ? ( 
+          <>
         <Gallery currentCategory={currentCategory}></Gallery>
         <About></About>
+        </>
+         ) : (
+          <ContactForm></ContactForm>
+          )}
       </main>
     </div>
   );

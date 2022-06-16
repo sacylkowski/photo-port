@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import Modal from "../Modal";
 
 
 function PhotoList({ category }) {
@@ -104,9 +105,20 @@ function PhotoList({ category }) {
     // going through each photo in the photos array, to find every photo that matches the category that the user selects
     // it's then returned in an array and assigned to currentPhotos
     const currentPhotos = photos.filter((photo) => photo.category === category);
+    const [currentPhoto, setCurrentPhoto] = useState();
+
+    // set the modal to false so it doesn't open until we want it to
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleModal = (image, i) => {
+        setCurrentPhoto({...image, index: i})
+        setIsModalOpen(true);
+    }
+
 
     return (
         <div>
+           {isModalOpen && <Modal currentPhoto={currentPhoto} />}
             <div className="flex-row">
                 {/* map the currentPhotos array to render each photo that matches the category */}
                 {currentPhotos.map((image, i) => (

@@ -20,7 +20,8 @@ const [currentCategory, setCurrentCategory] = useState(categories[0]);
       setCurrentCategory={setCurrentCategory}
       currentCategory={currentCategory} ></Nav>
       <main>
-        <Gallery></Gallery>
+        {/* passing the current category from the Gallery component */}
+        <Gallery currentCategory={currentCategory}></Gallery>
         <About></About>
       </main>
     </div>
